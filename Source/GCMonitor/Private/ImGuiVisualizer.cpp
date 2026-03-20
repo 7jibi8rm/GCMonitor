@@ -114,7 +114,7 @@ void AImGuiVisualizer::DrawUObjectGenerationTestWindow()
     static int GenerateCount = 1;
 
     ImGui::SetNextWindowPos(ImVec2(20, 20), ImGuiCond_FirstUseEver);
-    ImGui::SetNextWindowSize(ImVec2(350, 170), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(360, 410), ImGuiCond_FirstUseEver);
     ImGui::Begin("操作ウィンドウ");
 
 
@@ -174,7 +174,9 @@ void AImGuiVisualizer::DrawUObjectGenerationTestWindow()
 /// </summary>
 void AImGuiVisualizer::DrawAActorHolderReferenceWindow()
 {
-    ImGui::SetNextWindowSize(ImVec2(500, 150), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(380, 20), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(860, 410), ImGuiCond_FirstUseEver);
+
     ImGui::Begin("AHolderActor（格納先クラス）詳細");
     if (HolderActor == nullptr)
     {
@@ -357,7 +359,8 @@ void AImGuiVisualizer::DrawAActorHolderReferenceWindow()
 /// </summary>
 void AImGuiVisualizer::DrawUObjectListWindow()
 {
-    ImGui::SetNextWindowSize(ImVec2(600, 400), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(765, 440), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(485, 280), ImGuiCond_FirstUseEver);
 
     ImGui::Begin("UObjectリスト");
 
@@ -365,7 +368,7 @@ void AImGuiVisualizer::DrawUObjectListWindow()
     ImGui::Checkbox("全てのObject表示", &bIsActive);
 
     // テーブル構成: 3列 (Name, Address, GC Flags)
-    if (ImGui::BeginTable("ObjectTable", 5, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_Resizable | ImGuiTableFlags_ScrollY))
+    if (ImGui::BeginTable("ObjectTable", 3, ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg | ImGuiTableFlags_Resizable | ImGuiTableFlags_ScrollY))
     {
         // ヘッダーの設定
         ImGui::TableSetupColumn("Index", ImGuiTableColumnFlags_WidthFixed, 70.0f);
@@ -406,12 +409,9 @@ void AImGuiVisualizer::DrawLogWindow()
         return;
     }
 
-    ImGui::SetNextWindowSize(ImVec2(500, 300), ImGuiCond_FirstUseEver);
-    if (!ImGui::Begin("Object Test Log"))
-    {
-        ImGui::End();
-        return;
-    }
+    ImGui::SetNextWindowPos(ImVec2(20, 440), ImGuiCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(750, 290), ImGuiCond_FirstUseEver);
+    ImGui::Begin("ログ");
 
     // --- 上部操作エリア ---
     if (ImGui::Button("Clear")) {
