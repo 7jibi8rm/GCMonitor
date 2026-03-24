@@ -20,20 +20,30 @@ class GCMONITOR_API AImGuiVisualizer : public AActor
 	
 public:	
 
-	// Sets default values for this actor's properties
+
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	AImGuiVisualizer();
 
 protected:
 
-	/** アクター生成・開始時に呼び出され、ImGui Tickデリゲートを登録する */
+	/// <summary>
+	/// 生成・開始時に呼び出される。
+	/// </summary>
 	virtual void BeginPlay() override;
 
-	/** アクター終了時またはレベル遷移時に呼び出され、ImGui Tickデリゲートを解除する */
+	/// <summary>
+	/// 終了・破棄時に呼び出される。
+	/// </summary>
+	/// <param name="EndPlayReason"></param>
 	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 private:
 
-	/** ImGui描画用Tick関数。ImGuiのUI表示・テスト制御を行う */
+	/// <summary>
+	/// ImGui描画用Tick関数。ImGuiのUI表示・テスト制御を行う
+	/// </summary>
 	void ImGuiTick();
 
     /// <summary>

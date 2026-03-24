@@ -6,17 +6,8 @@
 
 
 /// <summary>
-/// ログレベル
+/// ログエントリー構造体。ログの内容と発生時刻、対象オブジェクトの情報を保持する
 /// </summary>
-UENUM()
-enum class ELogLevel : uint8
-{
-    Info,
-    Warning,
-    Error
-};
-
-/** ログの1行を表現する構造体 */
 struct FTrackingLogEntry
 {
     FString Timestamp{};     // ログの発生時刻（例: "12:34:56"）
@@ -25,10 +16,7 @@ struct FTrackingLogEntry
     FString EventMessage{};  // "BeginDestroy" などの内容
 
     FTrackingLogEntry(int32 InId, const FString& InName, const FString& InMessage)
-        : SubjectId(InId)
-        , SubjectName(InName)
-        , EventMessage(InMessage)
-    {
+        : SubjectId(InId), SubjectName(InName), EventMessage(InMessage){
         const auto& Now = FDateTime::Now();
         Timestamp = FString::Printf(TEXT("%02d:%02d:%02d.%03d"), Now.GetHour(), Now.GetMinute(), Now.GetSecond(), Now.GetMillisecond());
     }
@@ -57,10 +45,9 @@ public:
     /// <summary>
     /// 新規ログ追加
     /// </summary>
-    /// <param name="InLevel"></param>
     /// <param name="InTarget"></param>
     /// <param name="InMessage"></param>
-    void AddLog(ELogLevel InLevel, const UObject* InTarget, const FString& InMessage);
+    void AddLog(const UObject* InTarget, const FString& InMessage);
 
     /** 蓄積された全ログを取得 */
     const TArray<FTrackingLogEntry>& GetLogEntries() const { return LogHistory; }
@@ -71,9 +58,7 @@ public:
     void ClearLogs();
 
 private:
-    /** ログの履歴。数が増えすぎないよう適宜管理する */
-    TArray<FTrackingLogEntry> LogHistory;
 
-    /** ログの最大保持件数 */
-    const int32 MaxLogCount = 99999; // 基本的に枯渇しないようにしておく。
+    /// ログの履歴
+    TArray<FTrackingLogEntry> LogHistory{};
 };

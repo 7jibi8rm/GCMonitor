@@ -11,7 +11,7 @@ namespace
 
 // 生成するUObjectのクラス。今回はテスト用のUSubjectクラスに固定。
 const char* ObjectTypeNames[2] = {
-    "USbject",
+    "USubject",
     "AActorSubject",
 };
 
@@ -31,7 +31,7 @@ const char* StorageLocationNames[static_cast<int32>(EStorageLocation::Num)] = {
 const char* ActorStorageLocationNames[static_cast<int32>(EStorageLocation::Num)] = {
     "TObjectPtr<UActorSubject>",
     "UActorSubject*",
-    "TWeakObjectPtr<ActorUSubject>",
+    "TWeakObjectPtr<UActorUSubject>",
     "TArray<TObjectPtr<UActorSubject>>",
     "TArray<UActorSubject*>",
     "TArray<TWeakObjectPtr<UActorSubject>>",
@@ -43,7 +43,9 @@ const char* ActorStorageLocationNames[static_cast<int32>(EStorageLocation::Num)]
 
 };
 
-// Sets default values
+/// <summary>
+/// コンストラクタ
+/// </summary>
 AImGuiVisualizer::AImGuiVisualizer()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
@@ -51,7 +53,9 @@ AImGuiVisualizer::AImGuiVisualizer()
 
 }
 
-// Called when the game starts or when spawned
+/// <summary>
+/// 生成・開始時に呼び出される。
+/// </summary>
 void AImGuiVisualizer::BeginPlay()
 {
 	Super::BeginPlay();
@@ -67,7 +71,10 @@ void AImGuiVisualizer::BeginPlay()
     HolderActor = GetWorld()->SpawnActor<AHolderActor>();
 }
 
-/** アクター終了時またはレベル遷移時に呼び出され、ImGui Tickデリゲートを解除する */
+/// <summary>
+/// 終了・破棄時に呼び出される。
+/// </summary>
+/// <param name="EndPlayReason"></param>
 void AImGuiVisualizer::EndPlay(const EEndPlayReason::Type EndPlayReason)
 {
 	Super::EndPlay(EndPlayReason);
@@ -81,7 +88,9 @@ void AImGuiVisualizer::EndPlay(const EEndPlayReason::Type EndPlayReason)
 }
 
 
-/** ImGui描画用Tick関数。ImGuiのUI表示・テスト制御を行う */
+/// <summary>
+/// ImGui描画用Tick関数。ImGuiのUI表示・テスト制御を行う
+/// </summary>
 void AImGuiVisualizer::ImGuiTick()
 {
     // UObject生成テスト用ウィンドウの描画
@@ -102,6 +111,9 @@ void AImGuiVisualizer::ImGuiTick()
 /// </summary>
 void AImGuiVisualizer::DrawUObjectGenerationTestWindow()
 {
+    // 【捕捉】以下、本メソッドでのみ使用するため静的変数で運用します。
+    // AImGuiVisualizerはゲーム内に1つだけの想定ため、問題ないと判断しました。
+ 
     // 継承タイプ選択用の静的変数
     static int SelectedInheritanceType = 0;
     // 生成物選択用の静的変数
@@ -174,6 +186,13 @@ void AImGuiVisualizer::DrawUObjectGenerationTestWindow()
 /// </summary>
 void AImGuiVisualizer::DrawAActorHolderReferenceWindow()
 {
+    // 【捕捉】以下、本メソッドでのみ使用するため静的変数で運用します。
+    // AImGuiVisualizerはゲーム内に1つだけの想定ため、問題ないと判断しました。
+
+    // nullptr表示スキップ用の静的変数
+    static bool bSkipNullptr = true;
+
+
     ImGui::SetNextWindowPos(ImVec2(380, 20), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(860, 410), ImGuiCond_FirstUseEver);
 
@@ -185,7 +204,6 @@ void AImGuiVisualizer::DrawAActorHolderReferenceWindow()
         return;
     }
 
-    static bool bSkipNullptr = true;
     ImGui::Checkbox("nullptrスキップ", &bSkipNullptr);
 
     // テーブルセットアップ用ラムダ関数
@@ -359,12 +377,18 @@ void AImGuiVisualizer::DrawAActorHolderReferenceWindow()
 /// </summary>
 void AImGuiVisualizer::DrawUObjectListWindow()
 {
+    // 【捕捉】以下、本メソッドでのみ使用するため静的変数で運用します。
+    // AImGuiVisualizerはゲーム内に1つだけの想定ため、問題ないと判断しました。
+
+    // 監視対象オブジェクト以外の表示切り替え用の静的変数
+    static bool bIsActive = false;
+
+
     ImGui::SetNextWindowPos(ImVec2(765, 440), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(485, 280), ImGuiCond_FirstUseEver);
 
     ImGui::Begin("UObjectリスト");
 
-    static bool bIsActive = false;
     ImGui::Checkbox("全てのObject表示", &bIsActive);
 
     // テーブル構成: 3列 (Name, Address, GC Flags)

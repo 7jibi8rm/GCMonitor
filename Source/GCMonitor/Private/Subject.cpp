@@ -237,7 +237,7 @@ void USubject::AddLog(const FString& InLogDetail)
     {
         if (UTrackingSubsystem* Tracking = GEngine->GetEngineSubsystem<UTrackingSubsystem>())
         {
-            Tracking->AddLog(ELogLevel::Info, this, InLogDetail);
+            Tracking->AddLog(this, InLogDetail);
         }
     }
 }

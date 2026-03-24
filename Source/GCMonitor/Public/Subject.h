@@ -25,8 +25,6 @@ public:
     /// </summary>
     virtual ~USubject();
 
-    // 基本的なライフサイクル
-
     /// <summary>
     /// プロパティ初期化後に呼ばれる。C++コンストラクタとプロパティ初期化後の追加処理用。
     /// </summary>
@@ -196,22 +194,6 @@ public:
     /// アセットレジストリ用タグ情報の取得（旧形式）。
     /// </summary>
     virtual void GetAssetRegistryTags(TArray<FAssetRegistryTag>& OutTags) const override;
-
-    // エディタ専用（必要に応じて有効化）
-    // #if WITH_EDITOR
-    // virtual void PreEditChange(FProperty* PropertyAboutToChange) override; // プロパティ編集前
-    // virtual void PreEditChange(class FEditPropertyChain& PropertyAboutToChange) override; // 構造体プロパティ編集前
-    // virtual bool CanEditChange(const FProperty* InProperty) const override; // 編集可否判定
-    // virtual bool CanEditChange(const FEditPropertyChain& PropertyChain) const override; // 構造体プロパティ編集可否判定
-    // virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override; // プロパティ編集後
-    // virtual void PostEditChangeChainProperty(struct FPropertyChangedChainEvent& PropertyChangedEvent) override; // 構造体プロパティ編集後
-    // virtual void PreEditUndo() override; // Undo前
-    // virtual void PostEditUndo() override; // Undo後
-    // virtual void PostEditUndo(TSharedPtr<ITransactionObjectAnnotation> TransactionAnnotation) override; // Undo後（アノテーション付き）
-    // virtual void PostTransacted(const FTransactionObjectEvent& TransactionEvent) override; // トランザクション後
-    // virtual bool IsSelectedInEditor() const override; // エディタ選択状態
-    // virtual void PostRename(UObject* OldOuter, const FName OldName) override; // リネーム後
-    // #endif
 
 private:
     /// <summary>
