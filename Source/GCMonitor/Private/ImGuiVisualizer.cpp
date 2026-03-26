@@ -129,6 +129,11 @@ void AImGuiVisualizer::DrawUObjectGenerationTestWindow()
     ImGui::SetNextWindowSize(ImVec2(360, 410), ImGuiCond_FirstUseEver);
     ImGui::Begin("操作ウィンドウ");
 
+    if (!IsValid(HolderActor)){
+        ImGui::TextColored(ImVec4(1, 0.5f, 0.5f, 1), "AHolderActor is nullptr.");
+        ImGui::End();
+        return;
+    }
 
     ImGui::TextColored(ImVec4(0, 1, 1, 1), "オブジェクト生成");
     ImGui::Checkbox("UPROPERTY付与", &bIsGCProtected);
@@ -197,8 +202,7 @@ void AImGuiVisualizer::DrawAActorHolderReferenceWindow()
     ImGui::SetNextWindowSize(ImVec2(860, 410), ImGuiCond_FirstUseEver);
 
     ImGui::Begin("AHolderActor（格納先クラス）詳細");
-    if (HolderActor == nullptr)
-    {
+    if (!IsValid(HolderActor)){
         ImGui::TextColored(ImVec4(1, 0.5f, 0.5f, 1), "AHolderActor is nullptr.");
         ImGui::End();
         return;
@@ -429,13 +433,15 @@ void AImGuiVisualizer::DrawUObjectListWindow()
 /// </summary>
 void AImGuiVisualizer::DrawLogWindow()
 {
-    if (!GEngine){
-        return;
-    }
-
     ImGui::SetNextWindowPos(ImVec2(20, 440), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(750, 290), ImGuiCond_FirstUseEver);
     ImGui::Begin("ログ");
+
+    if (!IsValid(GEngine)) {
+        ImGui::TextColored(ImVec4(1, 0.5f, 0.5f, 1), "GEngine is nullptr.");
+        ImGui::End();
+        return;
+    }
 
     // --- 上部操作エリア ---
     if (ImGui::Button("Clear")) {
