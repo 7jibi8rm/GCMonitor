@@ -111,19 +111,6 @@ void AImGuiVisualizer::ImGuiTick()
 /// </summary>
 void AImGuiVisualizer::DrawUObjectGenerationTestWindow()
 {
-    // 【捕捉】以下、本メソッドでのみ使用するため静的変数で運用します。
-    // AImGuiVisualizerはゲーム内に1つだけの想定ため、問題ないと判断しました。
- 
-    // 継承タイプ選択用の静的変数
-    static int SelectedInheritanceType = 0;
-    // 生成物選択用の静的変数
-    static int SelectedObject = 0;
-    // 格納先選択用の静的変数
-    static int SelectedTarget = 0;
-    // GC保護の有無選択用の静的変数
-    static bool bIsGCProtected = true;
-    // 生成数選択用の静的変数
-    static int GenerateCount = 1;
 
     ImGui::SetNextWindowPos(ImVec2(20, 20), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(360, 410), ImGuiCond_FirstUseEver);
@@ -191,12 +178,6 @@ void AImGuiVisualizer::DrawUObjectGenerationTestWindow()
 /// </summary>
 void AImGuiVisualizer::DrawAActorHolderReferenceWindow()
 {
-    // 【捕捉】以下、本メソッドでのみ使用するため静的変数で運用します。
-    // AImGuiVisualizerはゲーム内に1つだけの想定ため、問題ないと判断しました。
-
-    // nullptr表示スキップ用の静的変数
-    static bool bSkipNullptr = true;
-
 
     ImGui::SetNextWindowPos(ImVec2(380, 20), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(860, 410), ImGuiCond_FirstUseEver);
@@ -381,13 +362,6 @@ void AImGuiVisualizer::DrawAActorHolderReferenceWindow()
 /// </summary>
 void AImGuiVisualizer::DrawUObjectListWindow()
 {
-    // 【捕捉】以下、本メソッドでのみ使用するため静的変数で運用します。
-    // AImGuiVisualizerはゲーム内に1つだけの想定ため、問題ないと判断しました。
-
-    // 監視対象オブジェクト以外の表示切り替え用の静的変数
-    static bool bIsActive = false;
-
-
     ImGui::SetNextWindowPos(ImVec2(765, 440), ImGuiCond_FirstUseEver);
     ImGui::SetNextWindowSize(ImVec2(485, 280), ImGuiCond_FirstUseEver);
 

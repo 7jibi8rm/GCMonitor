@@ -80,4 +80,31 @@ private:
     UPROPERTY()
 	TObjectPtr<AHolderActor> HolderActor{};
 
+
+	// ------------------------------------------
+	// 以下、ImGui制御用の変数です。
+	// 組み込み型を使用し、リフレクションを外してあります。
+	// ------------------------------------------
+
+	// 継承タイプ選択用の静的変数
+	int SelectedInheritanceType{0};
+
+	// 生成物選択用の静的変数
+	int SelectedObject{0};
+
+	// 格納先選択用の静的変数
+	int SelectedTarget{0};
+
+	// GC保護の有無選択用の静的変数
+	bool bIsGCProtected{true};
+
+	// 生成数選択用の静的変数
+	int GenerateCount{1};
+
+	// nullptr表示スキップ用の静的変数
+	bool bSkipNullptr{true};
+
+	// 監視対象オブジェクト以外の表示切り替え用の静的変数
+	bool bIsActive{false};
+
 };
