@@ -43,3 +43,7 @@ AActorSubjectと同様に、観測用の処理のため独自継承していま�
 - [UTrackingSubsystem](https://github.com/7jibi8rm/GCMonitor/blob/master/Source/GCMonitor/Public/TrackingSubsystem.h)<br>
 ログを管理しています。<br>
 観測データを参照しやすいよう、ログ用文字列を独自クラスで管理しています。<br>
+
+## 検証レポート
+
+[【UE5】GC挙動検証 UObject/AActor 格納先別まとめ](https://zenn.dev/f90f6j43qb/articles/df7b70d3787810)
